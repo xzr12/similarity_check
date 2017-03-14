@@ -49,7 +49,7 @@ def generate_corpora():
     return texts
 
 
-def generate_model_and_calc_similarity(model_file, texts, topic_num):
+def generate_model_and_calc_similarity(texts, topic_num):
     dictionary = corpora.Dictionary(texts)
     corpus = [dictionary.doc2bow(text) for text in texts]
 
@@ -63,3 +63,26 @@ def generate_model_and_calc_similarity(model_file, texts, topic_num):
     index = similarities.MatrixSimilarity(lsi[corpus])
 
     return dictionary, lsi, index
+
+
+def output_file(output, files, texts, dictionary, lsi, index, border):
+    out = open(output, 'w')
+
+    for i in range(len(files)):
+        out.write(files[i] + '\n')
+        # compute similarity of one file
+        test = texts[i]
+        test_bow = dictionary.doc2bow(test)
+        test_lsi = lsi[test_bow]
+        sims = index[test_lsi]
+        sorted_sims = sorted(enumerate(sims), key=lambda item: -item[1])
+
+        for j, k in sorted_sims[1:]:
+            if k >= border:
+                out.write(files[j] + ' ' + str(k) + '\n')
+            else:
+                break
+        out.write('\n')
+
+    out.close()
+    return

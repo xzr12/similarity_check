@@ -2,6 +2,9 @@
 2016213586homework/*
 2016213586homework.zip
 .idea/
+seg/
+txt/
+output.txt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

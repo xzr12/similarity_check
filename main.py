@@ -13,7 +13,7 @@ from pdf2txt import *
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Compare')
-    parser.add_argument('--input', type=str, default='./2016213586homework/', help='documents input folder')
+    parser.add_argument('--input', type=str, default='./data/', help='documents input folder')
     parser.add_argument('--topic_num', type=int, default=10, help='topic num of lsi model')
     parser.add_argument('--border', type=float, default=0.9, help='border of similarity to be recorded')
     parser.add_argument('--output', type=str, default='output.txt', help='similarity of documents')
